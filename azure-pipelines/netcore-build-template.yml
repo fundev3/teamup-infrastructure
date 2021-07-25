@@ -18,11 +18,10 @@ parameters:
     default: 'true'
     type: string
 
-pool:
-  vmImage: ${{ parameters.vmImage }}
-
 jobs:
 - job: Build
+  pool:
+    vmImage: ${{ parameters.vmImage }}
   steps:
   - task: UseDotNet@2
     displayName: 'Dotnet Install'
