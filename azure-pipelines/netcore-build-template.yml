@@ -15,7 +15,7 @@ parameters:
     default: 'Release'
     type: string
   - name: 'styleCopEnabled'
-    default: '/p:TreatWarningsAsErrors=true'
+    default: 'true'
     type: string
 
 pool:
@@ -35,7 +35,7 @@ jobs:
     inputs:
       command: 'build'
       projects: ${{ parameters.projectsPath }}
-      arguments: '--configuration ${{ parameters.buildConfiguration }} --output $(Build.ArtifactStagingDirectory) ${{ parameters.styleCopEnabled }}'
+      arguments: '--configuration ${{ parameters.buildConfiguration }} --output $(Build.ArtifactStagingDirectory) /p:TreatWarningsAsErrors=${{ parameters.styleCopEnabled }}'
   
   - task: DotNetCoreCLI@2
     displayName: 'Dotnet Test'
