@@ -44,6 +44,7 @@ jobs:
 
   - task: DotNetCoreCLI@2
     displayName: 'Dotnet Publish'
+    condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
     inputs:
       command: 'publish'
       publishWebProjects: false
@@ -52,6 +53,7 @@ jobs:
 
   - task: ArchiveFiles@2
     displayName: 'Archive Files'
+    condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
     inputs:
       rootFolderOrFile: '$(Build.ArtifactStagingDirectory)'
       includeRootFolder: false
