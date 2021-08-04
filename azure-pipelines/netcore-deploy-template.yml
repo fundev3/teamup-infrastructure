@@ -1,0 +1,24 @@
+parameters:
+  - name: 'azureSubscription'
+    default: 'devlevel3-dev (a797242d-ce60-41aa-98ca-2e22d5221cfe)'
+    type: string
+  - name: 'appName'
+    default: 'fa-tuapi-projects-$(envName)-bra'
+    type: string
+
+jobs: 
+- deployment: Deploy
+  displayName: 'Deploy to dev'
+  environment: $(envName)
+  strategy:
+   runOnce:
+     deploy:
+       steps:
+       - task: AzureFunctionApp@1
+         displayName: 'Deploy API'
+         inputs:
+           azureSubscription: ${{ parameters.azureSubscription }}
+           appType: 'functionAppLinux'
+           appName: ${{ parameters.appName }}
+           package: '$(Pipeline.Workspace)/drop/$(Build.BuildId).zip'
+           runtimeStack: 'DOTNET|3.1'
