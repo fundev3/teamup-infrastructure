@@ -3,7 +3,7 @@ parameters:
     default: 'devlevel3-dev (a797242d-ce60-41aa-98ca-2e22d5221cfe)'
     type: string
   - name: 'appName'
-    default: 'fa-tuapi-projects-$(envName)-bra'
+    default: 'fa-tuapi-$(projName)-$(envName)-bra'
     type: string
 
 jobs: 
