@@ -1,0 +1,9 @@
+{
+    "scripts": {
+        "migrate:up": "migrate-mongo up",
+        "migrate:down": "migrate-mongo down"
+    },
+    "dependencies": {
+        "mongodb": "^4.1.0"
+    }
+}
