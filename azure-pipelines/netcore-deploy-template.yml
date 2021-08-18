@@ -11,14 +11,14 @@ jobs:
   displayName: 'Deploy to dev'
   environment: $(envName)
   strategy:
-   runOnce:
-     deploy:
-       steps:
-       - task: AzureFunctionApp@1
-         displayName: 'Deploy API'
-         inputs:
-           azureSubscription: ${{ parameters.azureSubscription }}
-           appType: 'functionAppLinux'
-           appName: ${{ parameters.appName }}
-           package: '$(Pipeline.Workspace)/drop/$(Build.BuildId).zip'
-           runtimeStack: 'DOTNET|3.1'
+    runOnce:
+      deploy:
+        steps:
+        - task: AzureFunctionApp@1
+          displayName: 'Deploy API'
+          inputs:
+            azureSubscription: ${{ parameters.azureSubscription }}
+            appType: 'functionAppLinux'
+            appName: ${{ parameters.appName }}
+            package: '$(Pipeline.Workspace)/drop/$(Build.BuildId).zip'
+            runtimeStack: 'DOTNET|3.1'
