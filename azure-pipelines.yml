@@ -1,0 +1,37 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- develop
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+- task: AzureResourceManagerTemplateDeployment@3
+  inputs:
+    deploymentScope: 'Resource Group'
+    azureResourceManagerConnection: 'devlevel3-dev-conn'
+    subscriptionId: 'a797242d-ce60-41aa-98ca-2e22d5221cfe'
+    action: 'Create Or Update Resource Group'
+    resourceGroupName: 'rg-stsandbox-dev-eus'
+    location: 'East US'
+    templateLocation: 'URL of the file'
+    csmFileLink: 'https://raw.githubusercontent.com/fundev3/teamup-infrastructure/develop/azure-arm-templates/azuredeploy.json'
+    csmParametersFileLink: 'https://raw.githubusercontent.com/fundev3/teamup-infrastructure/develop/azure-arm-templates/azuredeploy.parameters.json'
+    deploymentMode: 'Validation'
+
+- task: AzureResourceManagerTemplateDeployment@3
+  inputs:
+    deploymentScope: 'Resource Group'
+    azureResourceManagerConnection: 'devlevel3-dev-conn'
+    subscriptionId: 'a797242d-ce60-41aa-98ca-2e22d5221cfe'
+    action: 'Create Or Update Resource Group'
+    resourceGroupName: 'rg-stsandbox-dev-eus'
+    location: 'East US'
+    templateLocation: 'URL of the file'
+    csmFileLink: 'https://raw.githubusercontent.com/fundev3/teamup-infrastructure/develop/azure-arm-templates/azuredeploy.json'
+    csmParametersFileLink: 'https://raw.githubusercontent.com/fundev3/teamup-infrastructure/develop/azure-arm-templates/azuredeploy.parameters.json'
+    deploymentMode: 'Incremental'
